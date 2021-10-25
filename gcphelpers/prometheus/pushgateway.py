@@ -5,11 +5,17 @@ metric_desc,
 pushgateway_url,
 value,
 labels,
-label_values,
 job="google-cloud-functions"):
   registry = CollectorRegistry()
-  g = Gauge(metric_name, metric_desc, labels, registry=registry)
-  g.labels(label_values).set(value)
+
+  _label_keys = []
+  _label_values = []
+  for key,val in labels.items():
+      _label_keys.append(key)
+      _label_values.append(val)
+
+  g = Gauge(metric_name, metric_desc, _label_keys, registry=registry)
+  g.labels(f"{join(val for val in _label_values)}").set(value)
 
   try:
       push_to_gateway(pushgateway_url, job=job, registry=registry)
