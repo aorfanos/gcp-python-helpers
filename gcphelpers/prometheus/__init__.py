@@ -6,6 +6,15 @@ pushgateway_url,
 value,
 labels,
 job="google-cloud-functions"):
+  """
+  Pushes a metric to a Prometheus PushGateway instance.
+  :param string metric_name: Metric name to use
+  :param string metric_desc: Metric description
+  :param string pushgateway_url: A PushGateway URL in the form of http://pushgateway:9091
+  :param float64 value: Metric value
+  :param dict labels:
+  :param string job:
+  """
   registry = CollectorRegistry()
 
   _label_keys = []

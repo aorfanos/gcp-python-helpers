@@ -1,11 +1,13 @@
 from google.cloud import secretmanager
 
-# Access a secret from Google Secret Manager
-# @args:
-# - secretRef: A Secret Manager secret name
-# - project: GCP project name or project ID
-# - version (optional): Define a specific version to use, otherwise use latest
 def access_secret_manager_secret(secretRef, project, version="latest"):
+    """
+    Access a secret from Google Secret Manager
+    :param string secretRef: A Secret Manager secret name
+    :param string project: GCP project name or project ID
+    :param string version: Define a specific version to use, otherwise use latest
+    :return: A plaintext secret value
+    """ 
     client   = secretmanager.SecretManagerServiceClient()
     secret   = f"projects/{project}/secrets/{secretRef}/versions/{version}"
 
