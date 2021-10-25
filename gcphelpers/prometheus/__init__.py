@@ -24,7 +24,7 @@ job="google-cloud-functions"):
       _label_values.append(val)
 
   g = Gauge(metric_name, metric_desc, _label_keys, registry=registry)
-  g.labels(tuple(_label_values)).set(value)
+  g.labels(*_label_values).set(value)
 
   try:
       push_to_gateway(pushgateway_url, job=job, registry=registry)
