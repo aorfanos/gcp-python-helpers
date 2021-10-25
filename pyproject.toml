@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gcphelpers"
-version = "0.0.3"
+version = "0.0.5"
 description = "Helpers for GCP functions"
 authors = ["Alex Orfanos <alexandros@mailerlite.com>"]
 
