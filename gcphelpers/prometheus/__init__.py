@@ -1,4 +1,4 @@
-from prometheus_client import CollectorRegistry, Gauge, push_to_gateway
+from prometheus_client import CollectorRegistry, Gauge, Counter, push_to_gateway
 
 def push_metrics_pushgateway(metric_name,
 metric_desc,
