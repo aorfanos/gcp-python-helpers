@@ -5,7 +5,8 @@ metric_desc,
 pushgateway_url,
 value,
 labels,
-job="google-cloud-functions"):
+job="google-cloud-functions",
+metric_type="gauge"):
   """
   Pushes a metric to a Prometheus PushGateway instance.
   :param string metric_name: Metric name to use
@@ -23,8 +24,12 @@ job="google-cloud-functions"):
       _label_keys.append(key)
       _label_values.append(val)
 
-  g = Gauge(metric_name, metric_desc, _label_keys, registry=registry)
-  g.labels(*_label_values).set(value)
+  if metric_type == 'gauge':
+      g = Gauge(metric_name, metric_desc, _label_keys, registry=registry)
+      g.labels(*_label_values).set(value)
+  elif metric_type == 'counter':
+      c = Counter(metric_name, metric_desc, _label_keys, registry=registry)
+      c.labels(*_label_values).inc()
 
   try:
       push_to_gateway(pushgateway_url, job=job, registry=registry)
